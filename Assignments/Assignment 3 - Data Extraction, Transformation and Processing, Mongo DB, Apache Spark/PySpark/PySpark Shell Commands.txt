@@ -1,0 +1,10 @@
+list=['education','canada','university','dalhousie','expensive','good school','good schools','bad school' ,'bad schools' ,'poor school' , 'poor schools','faculty','computer science','graduate']
+
+file = sc.textFile("/home/ubuntu/tweets_and_articles.txt")
+
+count = file.flatMap(lambda line: line.split(" "))\
+.filter(lambda x: x in list)\
+.map(lambda word: (word, 1))\
+.reduceByKey(lambda a,b: a+b)
+
+print(count.collect())
